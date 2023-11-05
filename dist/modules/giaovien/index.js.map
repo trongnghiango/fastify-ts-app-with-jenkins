@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/modules/giaovien/index.ts"],
+  "sourcesContent": ["import fp from 'fastify-plugin'\nimport autoload from '@fastify/autoload'\nimport path from 'path'\nimport { FastifyInstance } from 'fastify'\n\n\nasync function giaovien(fastify: FastifyInstance, opts: any) {\n  // These routes would be created in their own child instances\n  fastify.register(autoload, {\n    dir: path.join(__dirname, \"routes\"),\n    options: {\n      prefix: opts.prefix,\n    },\n  })\n}\n\nexport default fp(giaovien)\n"],
+  "mappings": "0jBAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAe,6BACfC,EAAqB,gCACrBC,EAAiB,mBAIjB,eAAeC,EAASC,EAA0BC,EAAW,CAE3DD,EAAQ,SAAS,EAAAE,QAAU,CACzB,IAAK,EAAAC,QAAK,KAAK,UAAW,QAAQ,EAClC,QAAS,CACP,OAAQF,EAAK,MACf,CACF,CAAC,CACH,CAEA,IAAOP,KAAQ,EAAAU,SAAGL,CAAQ",
+  "names": ["giaovien_exports", "__export", "giaovien_default", "__toCommonJS", "import_fastify_plugin", "import_autoload", "import_path", "giaovien", "fastify", "opts", "autoload", "path", "fp"]
+}
