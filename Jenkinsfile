@@ -14,12 +14,13 @@ pipeline {
       steps {
         sh "echo 'TEST'"
         sh 'node --version'
-        sh 'docker --version'
+        sh 'docker ps'
       }
     }
 
     stage('Build') {
       steps {
+        sh 'uname -a'
         sh "echo 'Build'"
       }
     }
