@@ -23,6 +23,7 @@ pipeline {
         sh "node -v"
         sh "yarn -v"
         sh "ls -la ~"
+        sh "git remote -v"
       }
     }
     
