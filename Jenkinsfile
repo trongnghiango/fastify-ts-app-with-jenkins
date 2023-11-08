@@ -1,13 +1,15 @@
 
 
 pipeline {
-  agent {
-    docker {
-      image 'node:18-alpine'
-      args '-u 0:0 -v /tmp:/root/.cache'
-    }
-  }
+  agent none 
+  
   stages {
+    agent {
+      docker {
+        image 'node:18-alpine'
+        args '-u 0:0 -v /tmp:/root/.cache'
+      }
+    }
     stage('Test') {
       steps {
         sh 'node --version'
