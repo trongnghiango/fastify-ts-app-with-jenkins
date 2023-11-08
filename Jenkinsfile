@@ -22,7 +22,6 @@ pipeline {
         sh "pwd"
         sh "node -v"
         sh "yarn -v"
-        sh "yarn"
         sh "ls -la ~"
       }
     }
@@ -37,20 +36,8 @@ pipeline {
       steps {
         sh "pwd"
         sh "docker -v"
-        sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
-        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
-        sh "docker image ls | grep ${DOCKER_IMAGE}"
-        sh "sudo apt install gnupg2 pass"
-        withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin'
-            script {
-              if (GIT_BRANCH ==~ /.*main.*/) {
-                sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                sh "docker push ${DOCKER_IMAGE}:latest"
-              }
-            }
-            
-        }
+        sh "echo ${DOCKER_TAG}"
+        
 
         //clean to save disk
         sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
