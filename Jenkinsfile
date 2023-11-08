@@ -15,6 +15,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'node --version'
+        sh 'git remote -v'
       }
     }
 
