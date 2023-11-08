@@ -1,58 +1,29 @@
+
+
 pipeline {
-  agent none 
-  
-  environment {
-    DOCKER_IMAGE = 'ntnghiant/nodejs-jenkins-docker-do' 
+  agent {
+    docker { image 'node:16.13.1-alpine' }
   }
-
   stages {
-    
-
-    stage("Install packages") {
-      agent {
-        docker {
-          image 'node:18-alpine'
-          args '-u 0:0 -v /tmp:/root/.cache'
-        }
-      }
-
+    stage('Test') {
       steps {
-        echo "yarn test"
-        sh "ls -la"
-        sh "pwd"
-        sh "node -v"
-        sh "yarn -v"
-        sh "ls -la ~"
-        sh "git remote -v"
-      }
-    }
-    
-    stage("Build") {
-      agent {
-        node { label 'built-in'}
-      }
-      environment {
-        DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
-      }
-      steps {
-        sh "pwd"
-        sh "docker -v"
-        sh "echo ${DOCKER_TAG}"
-        
-
-        //clean to save disk
-        sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
-        sh "docker image rm ${DOCKER_IMAGE}:latest"
+        sh 'node --version'
       }
     }
 
-    stage("Deploy") {
+    stage('Build') {
       steps {
-        echo "yarn start"
+        sh 'node --version'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh 'node --version'
       }
     }
   }
-   
+
   post {
     success {
       echo "SUCCESSFUL"
@@ -63,3 +34,4 @@ pipeline {
     }
   }
 }
+   
