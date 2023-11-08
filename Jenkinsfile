@@ -14,12 +14,17 @@ pipeline {
       steps {
         sh "echo 'TEST'"
         sh 'node --version'
-        sh 'docker ps'
+       
       }
     }
 
     stage('Build') {
+      agent {
+        node { label 'built-in'}
+      }
       steps {
+        sh 'docker -v'
+        sh 'docker ps'
         sh 'uname -a'
         sh "echo 'Build'"
       }
