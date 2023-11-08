@@ -2,16 +2,17 @@
 
 pipeline {
   agent none 
-  
+
   stages {
-    agent {
-      docker {
-        image 'node:18-alpine'
-        args '-u 0:0 -v /tmp:/root/.cache'
-      }
-    }
     stage('Test') {
+      agent {
+        docker {
+          image 'node:18-alpine'
+          args '-u 0:0 -v /tmp:/root/.cache'
+        }
+      }
       steps {
+        sh "echo 'TEST'"
         sh 'node --version'
         sh 'docker --version'
       }
@@ -19,14 +20,13 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'node --version'
-        sh 'git remote -v'
+        sh "echo 'Build'"
       }
     }
 
     stage('Deploy') {
       steps {
-        sh 'node --version'
+        sh "echo 'Deploy!'"
       }
     }
   }
