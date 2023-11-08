@@ -2,7 +2,10 @@
 
 pipeline {
   agent {
-    docker { image 'node:16.13.1-alpine' }
+    docker {
+      image 'node:18-alpine'
+      args '-u 0:0 -v /tmp:/root/.cache'
+    }
   }
   stages {
     stage('Test') {
